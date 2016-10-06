@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>vueTable</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
+  </head>
+  <body>
+<div id="vuetable">
+  <h2>带分页导航的表格</h2>
+  <div id="tab">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>姓名</th>
+          <th>年龄</th>
+          <th>身高</th>
+          <th>体重</th>
+          <th>性别</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="user in users | limitBy 5 offSet">
+          <td v-for="col in column">{{user[col.name]}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div id="pag">
+    <ul class="pagination">
+      <li><a v-on:click="cur=1">首页</a></li>
+      <li v-bind:class="{'disabled' : cur == 1}"><a v-on:click="cur--">上一页</a></li>
+      <li v-for="index in indexs" v-bind:class="{ 'active': cur == index}">
+        <a v-on:click="btnClick(index)">{{index}}</a>
+      </li>
+      <li v-bind:class="{'disabled' : cur == all}"><a v-on:click="cur++">下一页</a></li>
+      <li><a v-on:click="cur=all">末页</a></li>
+      <li><a>共 <i class="text-danger">{{all}}</i> 页</a></li>
+    </ul>
+  </div>
+</div>
+<script src="js/vue.js" charset="utf-8"></script>
+<script src="js/bootstrap.min.js" charset="utf-8"></script>
+<script src="js/vue-table.js" charset="utf-8"></script>
+  </body>
+</html>
